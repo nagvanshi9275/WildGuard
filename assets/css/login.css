@@ -1,63 +1,145 @@
+
+
 * {
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    background-image: url('../images/hero.jpg'); 
+    background-image: url('../images/hero.jpg');
     background-size: cover;
     background-position: center;
-    margin: 0;
-    padding: 0;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    overflow: hidden;
 }
 
+/* Animation for the login page container */
 .login-page {
     width: 400px;
-    background-color: rgba(255, 255, 255, 0.185); 
+    background-color: rgba(255, 255, 255, 0.25);
     border: 1px solid #ccc;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(15px);
+    animation: slideIn 1.2s ease-out;
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
 }
 
+@keyframes slideIn {
+    0% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* For responsive design */
 @media (min-width: 768px) {
     .login-page {
         width: 500px;
     }
 }
 
+/* Title styling */
 h2 {
     text-align: center;
     color: rgb(145, 190, 85);
     font-size: 30px;
     font-weight: 700;
     margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
 }
 
+/* Input field focus effect */
+.input-wrapper input:focus {
+    border-color: rgb(145, 190, 85);
+    outline: none;
+    box-shadow: 0 0 8px rgba(145, 190, 85, 0.4);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Button animation and hover effects */
+button {
+    width: 100%;
+    height: 45px;
+    background-color: rgb(145, 190, 85);
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.4s ease;
+}
+
+button:hover {
+    background-color: rgb(125, 170, 70);
+    box-shadow: 0 0 10px rgba(125, 170, 70, 0.5);
+}
+
+/* Button ripple effect on click */
+button:active::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 300%;
+    padding-top: 300%;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    animation: ripple 1s ease;
+}
+
+@keyframes ripple {
+    to {
+        transform: translate(-50%, -50%) scale(0);
+    }
+}
+
+/* Form fade-in animation */
 .data {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    animation: fadeIn 2s ease-in-out;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Input and label styling */
 .entry h3 {
     font-size: 18px;
     color: #333;
 }
 
 .entry input {
-    height: 40px;
+    height: 45px;
     width: 100%;
     padding: 8px 45px 8px 15px;
     font-size: 15px;
     border: 1px solid grey;
     border-radius: 5px;
     box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .input-wrapper {
@@ -67,8 +149,6 @@ h2 {
 }
 
 .icon {
-    border: none;
-    background: none;
     position: absolute;
     right: 10px;
     top: 50%;
@@ -76,36 +156,14 @@ h2 {
     cursor: pointer;
     color: #888;
     font-size: 16px;
+    transition: color 0.3s;
 }
 
-.fa {
-    margin-left: -40px;
-    height: 37px;
-    width: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.icon:hover {
+    color: rgb(145, 190, 85);
 }
 
-.fas {
-    font-size: 20px;
-}
-
-button {
-    width: 100%;
-    height: 40px;
-    background-color: rgb(145, 190, 85);
-    color: white;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: rgb(125, 170, 70);
-}
-
+/* Extras - Remember me and Forgot Password */
 .extras {
     display: flex;
     justify-content: space-between;
@@ -120,17 +178,21 @@ button:hover {
 .forgot-password {
     color: rgb(145, 190, 85);
     text-decoration: none;
+    transition: color 0.3s;
 }
 
 .forgot-password:hover {
+    color: rgb(125, 170, 70);
     text-decoration: underline;
 }
 
+/* Social Login Buttons */
 .social-login {
     border-top: 1px solid #333;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    animation: fadeIn 2.5s ease-in-out;
 }
 
 .social-login p {
@@ -148,7 +210,7 @@ button:hover {
 
 .social-btn {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     color: white;
     font-size: 16px;
     border: none;
@@ -159,33 +221,53 @@ button:hover {
     gap: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
+    position: relative;
+    overflow: hidden;
 }
 
 .google-btn {
     background-color: #4285F4;
-    color: white;
 }
 
 .google-btn:hover {
     background-color: #357ae8;
 }
 
-.google-logo {
-    height: 25px;
-    width: 25px;
+/* Social Button Ripple Effect */
+.social-btn:active::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 300%;
+    padding-top: 300%;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    animation: ripple 1s ease;
 }
 
 .signup-link {
     text-align: center;
     font-size: 14px;
     margin-top: 20px;
+    animation: fadeIn 3s ease-in-out;
 }
 
 .signup-link a {
     color: rgb(145, 190, 85);
     text-decoration: none;
+    transition: color 0.3s;
 }
 
 .signup-link a:hover {
+    color: rgb(125, 170, 70);
     text-decoration: underline;
 }
+
+
+
+
+
+
+
